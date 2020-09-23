@@ -13,7 +13,9 @@ set(
     )
 
 add_library(opensse SHARED ${SOURCES})
-target_link_libraries(opensse ${REQUIRED_LIB})
+target_link_libraries(opensse PRIVATE ${OPENCV_LIBS} PRIVATE Threads::Threads)
+target_include_directories(opensse PRIVATE ${OpenCV_INCLUDE_DIRS})
+target_compile_definitions(opensse PRIVATE cxx_std_11)
 set(LIBRARY_OUTPUT_PATH ${opensse_BINARY_DIR}/lib)
 
 install (TARGETS opensse LIBRARY DESTINATION /usr/local/lib)

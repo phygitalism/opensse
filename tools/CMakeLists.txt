@@ -5,7 +5,8 @@ set(SCRIPT_TOOLS sse filelist)
 
 macro (make_exec arg)
     add_executable(${arg} ${arg}.cpp)
-    target_link_libraries(${arg} ${REQUIRED_LIB} opensse)
+    target_link_libraries(${arg} PRIVATE Threads::Threads PRIVATE ${OpenCV_LIBS} PRIVATE opensse)
+    target_compile_definitions(${arg} PRIVATE cxx_std_11)
 endmacro (make_exec)
 
 foreach(tool ${TOOLS})
